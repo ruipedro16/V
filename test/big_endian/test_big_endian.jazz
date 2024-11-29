@@ -1,0 +1,16 @@
+from Stdlib require "stdlib.jinc"
+
+param int OUTLEN = 2;
+param int INLEN = 2;
+
+export
+fn put_big_endian_jazz(reg ptr u8[OUTLEN] b, reg u64 value, reg u64 bytes) -> reg ptr u8[OUTLEN] {
+    b = stdlib::big_endian::put(b, value, bytes);
+    return b;
+}
+
+export
+fn get_big_endian_jazz(reg ptr u8[INLEN] b, reg u64 bytes) -> reg u64 {
+    reg u64 result = stdlib::big_endian::get(b, bytes);
+    return result;
+}

@@ -1,0 +1,44 @@
+// From https://github.com/cisco/hash-sigs/blob/master/endian.c
+inline fn put(reg ptr u8[OUTLEN] b, reg u64 value, reg u64 bytes) -> reg ptr u8[OUTLEN] {
+    reg u64 i;
+    reg u8 t8;
+    reg u64 t64;
+
+    i = bytes;
+    i -= 1;
+
+    while (i >= 0) {
+        t64 = value;
+        t64 &= 0xff;
+        
+        b[i] = t64;
+
+        value >>= (8 & 63);
+
+        i -= 1;
+    }
+
+    return b;
+}
+
+
+// From https://github.com/cisco/hash-sigs/blob/master/endian.c
+inline fn get(reg ptr u8[INLEN] b, reg u64 bytes) -> reg u64 {
+    reg u64 i = 0;
+    reg u64 result = 0;
+    reg u8 t;
+    reg u64 t64;
+
+    while (i < bytes) {
+        t = b[i];
+        t &= 0xff;
+        t64 = (64u) t;
+
+        result <<= 8;
+        result += t64;
+
+        i += 1;
+    }
+
+    return result;
+}
