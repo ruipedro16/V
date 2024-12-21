@@ -44,9 +44,10 @@ impl CLIArgs {
         let mut args = CLIArgs::parse();
 
         if !Path::new(&args.config).exists() {
-            return Err(CLIArgsError::NoSuchConfigFile(
-                format!("No such config file: {}", args.config),
-            ));
+            return Err(CLIArgsError::NoSuchConfigFile(format!(
+                "No such config file: {}",
+                args.config
+            )));
         }
 
         if args.verbose {
@@ -56,9 +57,10 @@ impl CLIArgs {
         let file_content = fs::read_to_string(&args.config).expect("Failed to read config file");
 
         if serde_json::from_str::<Value>(&file_content).is_err() {
-            return Err(CLIArgsError::InvalidConfigFile(
-                format!("Invalid config file: {}", args.config),
-            ));
+            return Err(CLIArgsError::InvalidConfigFile(format!(
+                "Invalid config file: {}",
+                args.config
+            )));
         }
 
         if args.verbose {
@@ -75,9 +77,10 @@ impl CLIArgs {
             .map(|mut i| i.next().is_some())
             .unwrap_or(false)
         {
-            return Err(CLIArgsError::OutputDirectoryNotEmpty(
-                format!("Output directory is not empty: {}", args.outpath),
-            ));
+            return Err(CLIArgsError::OutputDirectoryNotEmpty(format!(
+                "Output directory is not empty: {}",
+                args.outpath
+            )));
         }
 
         Ok(args)
