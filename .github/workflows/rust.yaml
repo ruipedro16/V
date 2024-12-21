@@ -15,7 +15,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Run tests
         run: cargo test
-        working-directory: your/project/folder
+        working-directory: init-jasmin-impl/
 
   fmt:
     name: Rustfmt
@@ -27,7 +27,7 @@ jobs:
           components: rustfmt
       - name: Enforce formatting
         run: cargo fmt --check
-        working-directory: your/project/folder
+        working-directory: init-jasmin-impl/
 
   clippy:
     name: Clippy
@@ -40,7 +40,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Linting
         run: cargo clippy -- -D warnings
-        working-directory: your/project/folder
+        working-directory: init-jasmin-impl/
 
   coverage:
     name: Code coverage
@@ -54,4 +54,4 @@ jobs:
       - name: Generate code coverage
         run: |
           cargo tarpaulin --verbose --workspace
-        working-directory: your/project/folder
+        working-directory: init-jasmin-impl/
