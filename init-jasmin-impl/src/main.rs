@@ -1,8 +1,10 @@
+use std::error::Error;
+
 use init_jasmin_impl::{args, worker};
 
 use log::LevelFilter;
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
     // Initialize the logger
     env_logger::builder().filter_level(LevelFilter::Warn).init();
 
@@ -14,5 +16,5 @@ fn main() {
         }
     };
 
-    worker::run(&args).unwrap(); // TODO: Remove this unwrap and handle the errors properly
+    worker::run(&args)
 }
